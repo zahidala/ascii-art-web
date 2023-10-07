@@ -26,7 +26,7 @@ func serverHandler(res http.ResponseWriter, req *http.Request) {
 
 	data := ResponseBody{}
 
-	art, err := ascii.AsciiArtFS("d")
+	art, err := ascii.AsciiArtFS("d", "standard")
 
 	fmt.Println(art)
 

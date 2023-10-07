@@ -14,7 +14,7 @@ func getFirstLine(char rune) int {
 }
 
 // Function to get input as art
-func AsciiArtFS(arg string) (string, bool) {
+func AsciiArtFS(arg string, fileName string) (string, bool) {
 	var art string
 	// Split args by each new line
 	phrases := strings.Split(arg, "\\n")
@@ -40,14 +40,7 @@ func AsciiArtFS(arg string) (string, bool) {
 
 		// Read the file
 
-		var file []byte
-		var err error
-
-		file, err = os.ReadFile("fonts/standard.txt")
-
-		if len(os.Args) == 3 {
-			file, err = os.ReadFile("fonts/" + os.Args[2] + ".txt")
-		}
+		file, err := os.ReadFile("fonts/" + fileName + ".txt")
 
 		if err != nil {
 			return "ERROR: could not read font file\n", true
@@ -59,7 +52,7 @@ func AsciiArtFS(arg string) (string, bool) {
 		lines = strings.Split(string(file), "\n")
 
 		// /r is used to take care of carriage return character as only thinkertoy font file uses it.
-		if len(os.Args) == 3 && os.Args[2] == "thinkertoy" {
+		if fileName == "thinkertoy" {
 			lines = strings.Split(string(file), "\r\n")
 		}
 
