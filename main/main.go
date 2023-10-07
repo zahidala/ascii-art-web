@@ -26,9 +26,15 @@ func serverHandler(res http.ResponseWriter, req *http.Request) {
 
 	data := ResponseBody{}
 
-	art := ascii.AsciiArtFS("d")
+	art, err := ascii.AsciiArtFS("d")
+
+	fmt.Println(art)
 
 	data.Output = art
+
+	if err {
+		data.Output = art
+	}
 
 	// welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
 
