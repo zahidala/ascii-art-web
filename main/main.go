@@ -1,29 +1,36 @@
 package main
 
 import (
+	ascii "ascii/pkg"
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
-	"time"
 )
 
-type Welcome struct {
-	Name string
-	Time string
+// type Welcome struct {
+// 	Name string
+// 	Time string
+// }
+
+type ResponseBody struct {
+	Output string
 }
 
-func main() {
-	// // Handle args error
-	// err := ascii.ArgsErrors()
-	// if err {
-	// 	return
-	// }
+func formHandler() {
+	// code for form related stuff
+}
 
-	// // Convert input to art and print result
-	// art := ascii.AsciiArtFS(os.Args[1])
-	// fmt.Print(art)
+func serverHandler(res http.ResponseWriter, req *http.Request) {
+	// Convert input to art and print result
 
-	welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
+	data := ResponseBody{}
+
+	art := ascii.AsciiArtFS("d")
+
+	data.Output = art
+
+	// welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
 
 	templates := template.Must(template.ParseFiles("templates/template.html"))
 
@@ -31,17 +38,24 @@ func main() {
 		http.StripPrefix("/static/",
 			http.FileServer(http.Dir("static"))))
 
-	http.HandleFunc("/ascii", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/ascii-art", func(w http.ResponseWriter, r *http.Request) {
 		// if have name from http request r -> /?name=your-name-here -> name
-		if name := r.FormValue("name"); name != "" {
-			welcome.Name = name // set struct object to hold name from URL
-		}
+		// if name := r.FormValue("name"); name != "" {
+		// welcome.Name = name // set struct object to hold name from URL
+		// }
 		// if have error
-		if err := templates.ExecuteTemplate(w, "template.html", welcome); err != nil {
+		if err := templates.ExecuteTemplate(w, "template.html", data); err != nil {
 			// show error message
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
+
 	})
 
-	fmt.Println(http.ListenAndServe(":8080", nil))
+}
+
+func main() {
+	http.HandleFunc("/", serverHandler)
+	fmt.Println("Server is listening at Port 8080...")
+	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
