@@ -17,30 +17,11 @@ type ResponseBody struct {
 	Error  Error
 }
 
+var templates *template.Template
+
 func formHandler(res http.ResponseWriter, req *http.Request) {
 	// code for form related stuff
-}
-
-func serverHandler(res http.ResponseWriter, req *http.Request) {
 	// Convert input to art and print result
-
-	// data := ResponseBody{}
-
-	// art, err := ascii.AsciiArtFS("d", "standard")
-
-	// fmt.Println(art)
-
-	// data.Output = art
-
-	// if err {
-	// 	data.Output = art
-	// 	data.Error.Code = 500
-	// 	data.Error.Message = "Internal Server Error"
-	// }
-
-	// templates := template.Must(template.ParseGlob("templates/*.html"))
-
-	// templates.ExecuteTemplate(res, "index.html", data)
 
 	data := ResponseBody{}
 
@@ -58,14 +39,38 @@ func serverHandler(res http.ResponseWriter, req *http.Request) {
 		data.Output = art
 	}
 
-	templates := template.Must(template.ParseGlob("templates/*.html"))
-
 	templates.ExecuteTemplate(res, "index.html", data)
+}
+
+func serverHandler(res http.ResponseWriter, req *http.Request) {
+
+	// art, err := ascii.AsciiArtFS("d", "standard")
+
+	// fmt.Println(art)
+
+	// data.Output = art
+
+	// if err {
+	// 	data.Output = art
+	// 	data.Error.Code = 500
+	// 	data.Error.Message = "Internal Server Error"
+	// }
+
+	// templates := template.Must(template.ParseGlob("templates/*.html"))
+
+	data := ResponseBody{}
+	templates.ExecuteTemplate(res, "index.html", data)
+
+}
+
+func init() {
+	templates = template.Must(template.ParseGlob("templates/*.html"))
 
 }
 
 func main() {
 	http.HandleFunc("/", serverHandler)
+	http.HandleFunc("/ascii-art", formHandler)
 	http.Handle("/static/",
 		http.StripPrefix("/static/",
 			http.FileServer(http.Dir("static"))))
