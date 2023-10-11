@@ -3,31 +3,58 @@ package main
 import (
 	ascii "ascii/pkg"
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
+	"text/template"
 )
 
+type Error struct {
+	Message string
+	Code    int
+}
 type ResponseBody struct {
 	Output string
+	Error  Error
 }
 
-func formHandler() {
+func formHandler(res http.ResponseWriter, req *http.Request) {
 	// code for form related stuff
 }
 
 func serverHandler(res http.ResponseWriter, req *http.Request) {
 	// Convert input to art and print result
 
+	// data := ResponseBody{}
+
+	// art, err := ascii.AsciiArtFS("d", "standard")
+
+	// fmt.Println(art)
+
+	// data.Output = art
+
+	// if err {
+	// 	data.Output = art
+	// 	data.Error.Code = 500
+	// 	data.Error.Message = "Internal Server Error"
+	// }
+
+	// templates := template.Must(template.ParseGlob("templates/*.html"))
+
+	// templates.ExecuteTemplate(res, "index.html", data)
+
 	data := ResponseBody{}
 
-	art, err := ascii.AsciiArtFS("d", "standard")
+	if req.Method == "POST" {
+		input := req.FormValue("input")
+		font := req.FormValue("font")
 
-	fmt.Println(art)
+		art, err := ascii.AsciiArtFS(input, font)
 
-	data.Output = art
+		if err {
+			data.Error.Code = 500
+			data.Error.Message = "Internal Server Error"
+		}
 
-	if err {
 		data.Output = art
 	}
 
