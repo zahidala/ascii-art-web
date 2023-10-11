@@ -2,10 +2,10 @@
 
 
 <div class="container-form">
-    <form action="/" method="POST" class="form">
-        <textarea name="input" cols="30" rows="10"></textarea>
+    <form action="/ascii-art" method="POST" class="form">
+        <textarea name="input" cols="30" rows="10" maxlength="400"></textarea>
         <div class="container">
-            <select name="font" class="font">
+            <select name="font" class="font-select">
                 <option value="standard">Standard</option>
                 <option value="thinkertoy">Thinkertoy</option>
                 <option value="shadow">Shadow</option>
@@ -15,6 +15,10 @@
     </form>
 </div>
 
-<pre>{{.Output}}</pre>
+{{if .Output}}
+<div class="result">
+        <pre>{{.Output}}</pre>
+</div>
+{{end}}
 
 {{template "footer" }}
