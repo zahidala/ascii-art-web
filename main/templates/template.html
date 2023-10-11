@@ -1,14 +1,16 @@
+{{define "header"}}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/stylesheets/welcome-template.css">
-
-    <!-- The welcome struct (shown in the main.go code) is received within the HTML 
-    and we just need to use the . operator and retrieve the information we want -->
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
     <title>ASCII ART</title>
-  </head>
+    </head>
   <body>
-    <pre>{{.Output}}</pre>
+    <h1>ASCII ART WEB</h1>
+    {{end}}
+    
+    {{define "footer"}}
   </body>
 </html>
+{{end}}

@@ -8,11 +8,6 @@ import (
 	"net/http"
 )
 
-// type Welcome struct {
-// 	Name string
-// 	Time string
-// }
-
 type ResponseBody struct {
 	Output string
 }
@@ -36,31 +31,17 @@ func serverHandler(res http.ResponseWriter, req *http.Request) {
 		data.Output = art
 	}
 
-	// welcome := Welcome{"Anonymous", time.Now().Format(time.Stamp)}
+	templates := template.Must(template.ParseGlob("templates/*.html"))
 
-	templates := template.Must(template.ParseFiles("templates/template.html"))
-
-	http.Handle("/static/", // final URL can be anything
-		http.StripPrefix("/static/",
-			http.FileServer(http.Dir("static"))))
-
-	http.HandleFunc("/ascii-art", func(w http.ResponseWriter, r *http.Request) {
-		// if have name from http request r -> /?name=your-name-here -> name
-		// if name := r.FormValue("name"); name != "" {
-		// welcome.Name = name // set struct object to hold name from URL
-		// }
-		// if have error
-		if err := templates.ExecuteTemplate(w, "template.html", data); err != nil {
-			// show error message
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-
-	})
+	templates.ExecuteTemplate(res, "index.html", data)
 
 }
 
 func main() {
 	http.HandleFunc("/", serverHandler)
+	http.Handle("/static/",
+		http.StripPrefix("/static/",
+			http.FileServer(http.Dir("static"))))
 	fmt.Println("Server is listening at Port 8080...")
 	http.ListenAndServe(":8080", nil)
 	log.Fatal(http.ListenAndServe(":8080", nil))
