@@ -44,23 +44,26 @@ func formHandler(res http.ResponseWriter, req *http.Request) {
 
 func serverHandler(res http.ResponseWriter, req *http.Request) {
 
-	// art, err := ascii.AsciiArtFS("d", "standard")
-
-	// fmt.Println(art)
-
-	// data.Output = art
-
-	// if err {
-	// 	data.Output = art
-	// 	data.Error.Code = 500
-	// 	data.Error.Message = "Internal Server Error"
-	// }
-
-	// templates := template.Must(template.ParseGlob("templates/*.html"))
-
 	data := ResponseBody{}
-	templates.ExecuteTemplate(res, "index.html", data)
 
+	if req.URL.Path != "/" {
+		data.Error.Code = 404
+		data.Error.Message = "Page not found."
+		errorHandler(res, req, &data)
+		return
+	}
+
+	if req.Method == "GET" {
+
+		templates.ExecuteTemplate(res, "index.html", data)
+
+	}
+
+}
+
+func errorHandler(res http.ResponseWriter, req *http.Request, data *ResponseBody) {
+	res.WriteHeader(data.Error.Code)
+	templates.ExecuteTemplate(res, "error.html", data)
 }
 
 func init() {
@@ -75,6 +78,5 @@ func main() {
 		http.StripPrefix("/static/",
 			http.FileServer(http.Dir("static"))))
 	fmt.Println("Server is listening at Port 8080...")
-	http.ListenAndServe(":8080", nil)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
