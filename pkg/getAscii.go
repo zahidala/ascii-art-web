@@ -14,7 +14,7 @@ func getFirstLine(char rune) int {
 }
 
 // Function to get input as art
-func AsciiArtFS(arg string, fileName string) (string, bool) {
+func AsciiArtFS(arg string, fileName string) (string, bool, int) {
 	var art string
 	// Split args by each new line
 	phrases := strings.Split(arg, "\\n")
@@ -31,7 +31,7 @@ func AsciiArtFS(arg string, fileName string) (string, bool) {
 		// Save all first lines of each character into a slice
 		for _, char := range phrase {
 			if char < 32 || char > 126 {
-				return "ERROR: Character out of range\n", true
+				return "ERROR: Character out of range\n", true, 400
 			} else {
 				firstLine := getFirstLine(char)
 				firstLines = append(firstLines, firstLine)
@@ -43,7 +43,7 @@ func AsciiArtFS(arg string, fileName string) (string, bool) {
 		file, err := os.ReadFile("fonts/" + fileName + ".txt")
 
 		if err != nil {
-			return "ERROR: could not read font file\n", true
+			return "ERROR: could not read font file\n", true, 500
 		}
 
 		// Split the data into a slice of strings, one for each line.
@@ -65,5 +65,5 @@ func AsciiArtFS(arg string, fileName string) (string, bool) {
 			art += "\n"
 		}
 	}
-	return art, false
+	return art, false, 200
 }
