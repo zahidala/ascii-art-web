@@ -17,7 +17,7 @@ func getFirstLine(char rune) int {
 func AsciiArtFS(arg string, fileName string) (string, bool, int) {
 	var art string
 	// Split args by each new line
-	phrases := strings.Split(arg, "\\n")
+	phrases := strings.Split(arg, "\r\n")
 
 	// Print ascii for each phrase that was separated by a new line
 	for i, phrase := range phrases {
