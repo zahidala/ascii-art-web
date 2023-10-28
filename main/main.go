@@ -29,11 +29,13 @@ func formHandler(res http.ResponseWriter, req *http.Request) {
 		input := req.FormValue("input")
 		font := req.FormValue("font")
 
-		art, err := ascii.AsciiArtFS(input, font)
+		art, isError, errorCode := ascii.AsciiArtFS(input, font)
 
-		if err {
-			data.Error.Code = 500
-			data.Error.Message = "Internal Server Error"
+		if isError {
+			data.Error.Code = errorCode
+			data.Error.Message = art
+			errorHandler(res, req, &data)
+			return
 		}
 
 		data.Output = art
