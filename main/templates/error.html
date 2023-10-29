@@ -1,9 +1,11 @@
 {{ template "header" }}
 
-<div>
-    <h1>Error</h1>
-    <p>{{.Error.Code}}</p>
-    <p>{{.Error.Message}}</p>
+<div class="error">
+    <div class="error-stuff">
+        <h1>Error</h1>
+        <p>{{.Error.Code}}</p>
+        <p>{{.Error.Message}}</p>
+    </div>
 </div>
 
 {{ template "footer" }}

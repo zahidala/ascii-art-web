@@ -1,5 +1,6 @@
-body {
+html, body {
     background-color: purple;
+    height: 100%;
 }
 
 h1 {
@@ -73,13 +74,16 @@ pre {
     border-radius: 4px;
 }
 
-.error {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .error-stuff {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
