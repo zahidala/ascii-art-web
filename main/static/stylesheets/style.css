@@ -38,11 +38,11 @@ pre {
     justify-content: space-around;
     align-items: center;
     padding-top: 3%;
-    gap: 5px;
+    gap: 5rem;
 }
 
 .font-select {
-    width: 20%;
+    flex: 1;
     height: 50px;
     text-align: center;
     border-radius: 4px;
@@ -51,7 +51,7 @@ pre {
 }
 
 .btn-submit {
-    width: 20%;
+    flex: 1;
     height: 50px;
     border-radius: 4px;
     border: 1px solid white;
@@ -71,4 +71,15 @@ pre {
     min-height: 80%;
     margin: 0 auto;
     border-radius: 4px;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-stuff {
+    display: flex;
+    justify-content: center;
 }
