@@ -31,7 +31,7 @@ func AsciiArtFS(arg string, fileName string) (string, bool, int) {
 		// Save all first lines of each character into a slice
 		for _, char := range phrase {
 			if char < 32 || char > 126 {
-				return "ERROR: Character out of range\n", true, 400
+				return "Character out of range\n", true, 400
 			} else {
 				firstLine := getFirstLine(char)
 				firstLines = append(firstLines, firstLine)
@@ -43,7 +43,7 @@ func AsciiArtFS(arg string, fileName string) (string, bool, int) {
 		file, err := os.ReadFile("fonts/" + fileName + ".txt")
 
 		if err != nil {
-			return "ERROR: could not read font file\n", true, 500
+			return "Could not read font file\n", true, 500
 		}
 
 		// Split the data into a slice of strings, one for each line.

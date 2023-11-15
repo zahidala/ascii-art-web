@@ -1,11 +1,16 @@
 {{ template "header" }}
 
 <div class="error">
-    <div class="error-stuff">
-        <h1>Error</h1>
-        <p>{{.Error.Code}}</p>
-        <p>{{.Error.Message}}</p>
-    </div>
+    <h1>ASCII ART WEB</h1>
 </div>
+    <div class="error-stuff">
+        <h1>ERROR<br>{{.Error.Code}}: {{.Error.Message}}</h1>
+        <h2>Are you lost, baby girl? </h2>
+        <div class="container">
+            <a href="/">
+            <button type="reset" class="btn-submit"> Home Page </button>
+            </a>
+        </div>
+    </div>
 
 {{ template "footer" }}

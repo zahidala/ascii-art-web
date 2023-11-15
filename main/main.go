@@ -50,7 +50,7 @@ func serverHandler(res http.ResponseWriter, req *http.Request) {
 
 	if req.URL.Path != "/" {
 		data.Error.Code = 404
-		data.Error.Message = "Page not found."
+		data.Error.Message = "Page not found"
 		errorHandler(res, req, &data)
 		return
 	}
