@@ -1,5 +1,5 @@
 html, body {
-    background-color: purple;
+    background-color: rgb(210, 125, 210);
     height: 100%;
 }
 
@@ -71,6 +71,7 @@ pre {
 
 .result {
     border: 1px solid black;
+    border-spacing: 100px;
     border-radius: 6px;
     width: fit-content;
     height: fit-content;
