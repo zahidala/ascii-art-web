@@ -43,7 +43,8 @@ pre {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-top: 3%;
+    /* padding-top: 3%; */
+    padding-block: 3%; 
     gap: 5rem;
 }
 
@@ -69,6 +70,12 @@ pre {
     background-color: rgb(226, 222, 222);
 }
 
+.container-result {
+    /* margin: 2%; */
+    padding-inline: 1%;
+    padding-bottom: 2%;
+}
+
 .result {
     border: 1px solid black;
     border-spacing: 100px;
@@ -87,6 +94,10 @@ pre {
     height: 80%;
 }
 
+.error-stuff > h2 {
+    padding-block-end: 2%;
+}
+
 .error {
     display: flex;
     align-items: center;
@@ -95,6 +106,5 @@ pre {
 }
 
 .error > h1 {
-    text-align: center;
     font-size: 25px;
 }
