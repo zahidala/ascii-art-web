@@ -70,20 +70,15 @@ pre {
     background-color: rgb(226, 222, 222);
 }
 
-.container-result {
-    /* margin: 2%; */
-    padding-inline: 1%;
-    padding-bottom: 2%;
-}
-
 .result {
     border: 1px solid black;
     border-spacing: 100px;
     border-radius: 6px;
     width: fit-content;
     height: fit-content;
-    margin: 0 auto;
-    padding-inline: 10px;
+    margin: 20px;
+    display: inline-block;
+    padding: 10px;
 }
 
 .error-stuff {
